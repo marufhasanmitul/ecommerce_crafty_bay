@@ -9,11 +9,31 @@ class CraftBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
-      theme: ThemeData(
-        primarySwatch: MaterialColor(AppColors.primaryColor.value, AppColors().color)
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        home: const SplashScreen(),
+        theme: ThemeData(
+            primarySwatch:
+                MaterialColor(AppColors.primaryColor.value, AppColors().color),
+
+            inputDecorationTheme: const InputDecorationTheme(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                  width: 1,
+                  color: AppColors.primaryColor,
+                ))),
+
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  textStyle: const TextStyle(
+                      fontSize: 16,
+                      letterSpacing: 0.5,
+                      fontWeight: FontWeight.w600),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8))),
+            )));
   }
 }
