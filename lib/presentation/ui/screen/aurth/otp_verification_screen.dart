@@ -1,9 +1,14 @@
+import 'dart:async';
+
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/aurth/complete_profile_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../utils/image_assets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:get/get.dart';
+
 
 class OTPVerificationScreen extends StatefulWidget {
   const OTPVerificationScreen({Key? key}) : super(key: key);
@@ -13,9 +18,40 @@ class OTPVerificationScreen extends StatefulWidget {
 }
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    timerCode();
+  }
   final _formKey = GlobalKey<FormState>();
 
+
   TextEditingController pinCodeEditingController = TextEditingController();
+   Timer? timer;
+   int secondsRemaining = 120;
+  bool enableResend = false;
+
+  void timerCode(){
+    timer=Timer.periodic(const Duration(seconds: 1), (_) {
+      if(secondsRemaining!=0){
+        secondsRemaining--;
+        setState(() {
+
+        });
+      }else{
+        enableResend=true;
+        setState(() {});
+      }
+    });
+  }
+
+  void _resendCode() {
+    //other code here
+    secondsRemaining = 30;
+    enableResend = false;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +131,9 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formKey.currentState!.validate()) {
+                            Get.offAll(const CompleteProfileScreen());
+                          }
                         },
                         child: const Text(
                           "Next",
@@ -103,18 +141,21 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                RichText(
-                  text: const TextSpan(
-                      text: 'This code will expire in',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'This Code will expire in ',
                       style: TextStyle(color: Colors.grey),
-                      children: [
-                        TextSpan(
-                            text: '120 S',
-                            style: TextStyle(color: AppColors.primaryColor))
-                      ]),
+                    ),
+                    Text("$secondsRemaining S",style: const TextStyle(
+                      fontSize: 17,
+                      color: AppColors.primaryColor
+                    ),),
+                  ],
                 ),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: enableResend ? _resendCode : null,
                     child: const Text(
                       'Resend Code',
                       style: TextStyle(color: Colors.grey),
@@ -126,4 +167,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
       ),
     );
   }
+
+  @override
+  dispose(){
+    timer?.cancel();
+    super.dispose();
+  }
+
+
 }

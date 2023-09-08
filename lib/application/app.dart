@@ -15,9 +15,11 @@ class CraftBay extends StatelessWidget {
             primarySwatch:
                 MaterialColor(AppColors.primaryColor.value, AppColors().color),
 
-            inputDecorationTheme: const InputDecorationTheme(
+            inputDecorationTheme:  const InputDecorationTheme(
+
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+
                 border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
