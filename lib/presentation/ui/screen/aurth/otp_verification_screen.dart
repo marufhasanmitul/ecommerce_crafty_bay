@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ecommerce_crafty_bay/presentation/state_holders/otp_varification_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/aurth/complete_profile_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
@@ -19,39 +20,21 @@ class OTPVerificationScreen extends StatefulWidget {
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
+
+  final OtpVerificationController _otpVerificationController=Get.put(OtpVerificationController());
+
+
+
   @override
   void initState() {
     super.initState();
-    timerCode();
+    _otpVerificationController.timerCode();
   }
   final _formKey = GlobalKey<FormState>();
 
 
   TextEditingController pinCodeEditingController = TextEditingController();
-   Timer? timer;
-   int secondsRemaining = 120;
-  bool enableResend = false;
 
-  void timerCode(){
-    timer=Timer.periodic(const Duration(seconds: 1), (_) {
-      if(secondsRemaining!=0){
-        secondsRemaining--;
-        setState(() {
-
-        });
-      }else{
-        enableResend=true;
-        setState(() {});
-      }
-    });
-  }
-
-  void _resendCode() {
-    //other code here
-    secondsRemaining = 30;
-    enableResend = false;
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,14 +131,19 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                       'This Code will expire in ',
                       style: TextStyle(color: Colors.grey),
                     ),
-                    Text("$secondsRemaining S",style: const TextStyle(
-                      fontSize: 17,
-                      color: AppColors.primaryColor
-                    ),),
+                    GetBuilder<OtpVerificationController>(
+                      builder: (GetxController controller){
+                        return Text("${_otpVerificationController.secondsRemaining} S",style: const TextStyle(
+                            fontSize: 17,
+                            color: AppColors.primaryColor
+                        ),);
+                      },
+
+                    ),
                   ],
                 ),
                 TextButton(
-                    onPressed: enableResend ? _resendCode : null,
+                    onPressed: _otpVerificationController.enableResend ? _otpVerificationController.resendCode : null,
                     child: const Text(
                       'Resend Code',
                       style: TextStyle(color: Colors.grey),
@@ -170,7 +158,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   dispose(){
-    timer?.cancel();
+    _otpVerificationController.timer?.cancel();
     super.dispose();
   }
 
