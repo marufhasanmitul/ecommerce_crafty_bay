@@ -1,8 +1,9 @@
+import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/circular_icon_button.dart';
-
+import '../widgets/home_widget/search_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         title: Row(
           children: [
-            SvgPicture.asset('assets/images/logo_nav.svg'),
+            SvgPicture.asset(ImageAssets.craftyBayNavSvg),
             const Spacer(),
             CircularIconButton(
               icon: Icons.person,
@@ -35,6 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {},
             ),
           ],
+        ),
+      ),
+      body: const SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              SearchTextField()
+            ],
+          ),
         ),
       ),
     );
