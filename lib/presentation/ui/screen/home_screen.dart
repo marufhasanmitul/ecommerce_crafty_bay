@@ -1,4 +1,4 @@
-import 'package:ecommerce_crafty_bay/presentation/ui/utils/app_color.dart';
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/categories.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +8,7 @@ import '../widgets/home_widget/home_slider.dart';
 import '../widgets/home_widget/search_text_field.dart';
 import '../widgets/home_widget/section_header.dart';
 import '../widgets/product_card.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -57,12 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'Categories',
-                onTap: () {},
+                onTap: () {
+                  Get.to(const CategoriesScreen());
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
-
               SizedBox(
                 height: 90,
                 child: ListView.builder(
