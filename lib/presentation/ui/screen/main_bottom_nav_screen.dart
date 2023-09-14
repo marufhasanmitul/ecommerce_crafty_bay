@@ -1,3 +1,4 @@
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/cart_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/categories.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/create_review_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/electronics_screen.dart';
@@ -22,7 +23,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     const HomeScreen(),
     const CategoriesScreen(),
     const ElectronicsScreen(),
-    const ReviewScreen(),
+    const CartScreen(),
   ];
   @override
   Widget build(BuildContext context) {
