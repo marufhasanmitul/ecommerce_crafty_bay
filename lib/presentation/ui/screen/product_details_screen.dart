@@ -12,7 +12,6 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-
   List<Color> colors = [
     Colors.deepOrange,
     Colors.amber,
@@ -22,14 +21,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     Colors.black,
   ];
 
-  List<String> sizes = [
-    'S',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-    'XXXL'
-  ];
+  List<String> sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 0;
@@ -51,9 +43,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           leading: const BackButton(
                             color: Colors.black54,
                           ),
-                          title: const Text('Product details', style: TextStyle(
-                              color: Colors.black54
-                          ),),
+                          title: const Text(
+                            'Product details',
+                            style: TextStyle(color: Colors.black54),
+                          ),
                           backgroundColor: Colors.transparent,
                           elevation: 0,
                         ),
@@ -66,21 +59,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         children: [
                           Row(
                             children: [
-                              const Expanded(child: Text(
+                              const Expanded(
+                                  child: Text(
                                 'Addidas Shoe HK23454 - Black Edition',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.5
-                                ),)),
+                                    letterSpacing: 0.5),
+                              )),
                               CustomStepper(
                                   lowerLimit: 1,
                                   upperLimit: 10,
                                   stepValue: 1,
                                   value: 1,
-                                  onChange: (newValue) {
-                                    print(newValue);
-                                  })
+                                  onChange: (newValue) {})
                             ],
                           ),
                           Row(
@@ -126,12 +118,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               )
                             ],
                           ),
-                          const Text('Color', style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700
-                          ),),
-                          const SizedBox(height: 16,),
+                          const Text(
+                            'Color',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
                           SizedBox(
                             height: 28,
                             child: ListView.separated(
@@ -151,25 +147,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     backgroundColor: colors[index],
                                     child: _selectedColorIndex == index
                                         ? const Icon(
-                                      Icons.done,
-                                      color: Colors.white,
-                                    )
+                                            Icons.done,
+                                            color: Colors.white,
+                                          )
                                         : null,
                                   ),
                                 );
                               },
-                              separatorBuilder: (BuildContext context,
-                                  int index) {
-                                return const SizedBox(width: 8,);
-                              },),
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const SizedBox(
+                                  width: 8,
+                                );
+                              },
+                            ),
                           ),
-                          const SizedBox(height: 16,),
-                          const Text('Size', style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700
-                          ),),
-                          const SizedBox(height: 16,),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Text(
+                            'Size',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
                           SizedBox(
                             height: 28,
                             child: ListView.separated(
@@ -192,33 +197,36 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         borderRadius: BorderRadius.circular(4),
                                         color: _selectedSizeIndex == index
                                             ? AppColors.primaryColor
-                                            : null
-                                    ),
+                                            : null),
                                     alignment: Alignment.center,
                                     child: Text(sizes[index]),
                                   ),
                                 );
                               },
-                              separatorBuilder: (BuildContext context,
-                                  int index) {
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
                                 return const SizedBox(
                                   width: 8,
                                 );
                               },
                             ),
                           ),
-                          const SizedBox(height: 16,),
-                          const Text('Description', style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700
-                          ),),
-                          const SizedBox(height: 16,),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Text(
+                            'Description',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
                           const Text(
                               '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                            '''
-                          ),
-
+                            '''),
                         ],
                       ),
                     ),
@@ -233,31 +241,39 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
-                  )
-              ),
+                  )),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Price', style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: Colors.black54
-                      ),),
-                      SizedBox(height: 4,),
-                      Text('\$1000', style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                          color: AppColors.primaryColor
-                      ),),
+                      Text(
+                        'Price',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            color: Colors.black54),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        '\$1000',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            color: AppColors.primaryColor),
+                      ),
                     ],
                   ),
                   SizedBox(
                     width: 120,
                     child: ElevatedButton(
-                      onPressed: () {}, child: const Text('Add to cart'),),)
+                      onPressed: () {},
+                      child: const Text('Add to cart'),
+                    ),
+                  )
                 ],
               ),
             ),
