@@ -1,3 +1,4 @@
+import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/categories.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SectionHeader(
                 title: 'Categories',
                 onTap: () {
-                  Get.to(const CategoriesScreen());
+                  Get.find<MainBottomNavController>().changeScreen(1);
                 },
               ),
               const SizedBox(

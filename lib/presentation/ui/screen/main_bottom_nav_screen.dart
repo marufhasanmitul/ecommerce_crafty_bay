@@ -1,7 +1,7 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/cart_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/categories.dart';
-import 'package:ecommerce_crafty_bay/presentation/ui/screen/electronics_screen.dart';
-import 'package:ecommerce_crafty_bay/presentation/ui/screen/product_details_screen.dart';
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/wish_list_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,8 +21,8 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CategoriesScreen(),
-    const ElectronicsScreen(),
-    const ProductDetailsScreen(),
+    const CartScreen(),
+    const WishListScreen(),
   ];
 
   @override
