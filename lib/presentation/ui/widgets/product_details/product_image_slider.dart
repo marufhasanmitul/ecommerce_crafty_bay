@@ -11,6 +11,7 @@ class ProductImageSlider extends StatefulWidget {
 
 class _ProductImageSliderState extends State<ProductImageSlider> {
   final ValueNotifier<int> _selectedSlider = ValueNotifier(0);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -41,8 +42,6 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
             );
           }).toList(),
         ),
-
-
         Positioned(
           bottom: 10,
           left: 0,
@@ -56,13 +55,14 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                     width: 12,
                     height: 12,
                     margin:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.grey,
                         ),
                         borderRadius: BorderRadius.circular(10),
-                        color: value == i ? AppColors.primaryColor : Colors.white),
+                        color:
+                            value == i ? AppColors.primaryColor : Colors.white),
                   ));
                 }
                 return Row(
@@ -71,10 +71,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                 );
               }),
         )
-
-
-
       ],
-    ) ;
+    );
   }
 }
