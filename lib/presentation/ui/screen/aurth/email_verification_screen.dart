@@ -98,7 +98,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     final response =
     await controller.verifyEmail(_emailTextEditingController.text.trim());
     if (response) {
-      Get.to(() => const OTPVerificationScreen());
+      Get.to(() =>  OTPVerificationScreen(email: _emailTextEditingController.text.trim(),));
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

@@ -1,8 +1,49 @@
 import 'dart:async';
 
+import 'package:ecommerce_crafty_bay/data/models/netowork_response.dart';
+import 'package:ecommerce_crafty_bay/data/utility/network_caller.dart';
 import 'package:get/get.dart';
+import '../../data/utility/urls.dart';
 
 class OtpVerificationController extends GetxController{
+
+
+  bool _otpVerificationInProgress=false;
+  String _message='';
+  bool get otpVerificationInProgress =>_otpVerificationInProgress;
+  String get message => _message;
+
+  Future<bool> verifyOtp(String email,String otp)async{
+      _otpVerificationInProgress=true;
+      update();
+      final NetworkResponse response=await NetworkCaller().getRequest(Urls.verifyOtp(email,otp));
+      if(response.isSuccess){
+        return true;
+      }else{
+        return false;
+      }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Timer? timer;
   int secondsRemaining = 120;
   bool enableResend = false;

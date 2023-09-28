@@ -7,6 +7,8 @@ class NetworkCaller {
   Future<NetworkResponse> getRequest(String url) async {
     try {
       Response response = await get(Uri.parse(url));
+      log(response.statusCode.toString());
+      log(response.body);
 
       if (response.statusCode == 200 &&
           jsonDecode(response.body)['msg'] == 'success') {
