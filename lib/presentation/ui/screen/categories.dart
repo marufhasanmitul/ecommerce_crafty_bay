@@ -1,5 +1,4 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:ecommerce_crafty_bay/presentation/ui/widgets/home_widget/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,7 +40,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
               itemBuilder:(context,index){
                 return const FittedBox(
-                  child: CategoryCard(),
+                  // child: CategoryCard(),
                 );
               }
 
