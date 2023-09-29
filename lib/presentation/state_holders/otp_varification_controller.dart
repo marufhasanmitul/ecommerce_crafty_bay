@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ecommerce_crafty_bay/data/models/netowork_response.dart';
 import 'package:ecommerce_crafty_bay/data/utility/network_caller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:get/get.dart';
 import '../../data/utility/urls.dart';
 
@@ -17,7 +19,15 @@ class OtpVerificationController extends GetxController{
       _otpVerificationInProgress=true;
       update();
       final NetworkResponse response=await NetworkCaller().getRequest(Urls.verifyOtp(email,otp));
+
       if(response.isSuccess){
+        _otpVerificationInProgress=false;
+        update();
+
+
+
+        await AuthController.setAccessToken(response.responseJson?['data']);
+        _message=response.responseJson?['data'] ?? '';
         return true;
       }else{
         return false;
