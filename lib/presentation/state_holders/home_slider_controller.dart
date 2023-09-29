@@ -6,20 +6,20 @@ import 'package:get/get.dart';
 import '../../data/utility/urls.dart';
 
 class HomeSliderController extends GetxController{
-  bool _gethomeSliderProgress=false;
+  bool _getHomeSliderProgress=false;
 
-  SliderModel _sliderModel=SliderModel();
+  SliderModel _sliderModel = SliderModel();
 
   SliderModel get sliderModel=>_sliderModel;
 
-  bool get getHomeSliderInProgress =>_gethomeSliderProgress;
+  bool get getHomeSliderInProgress =>_getHomeSliderProgress;
 
 
   Future<bool> getHomeSlider()async{
-    _gethomeSliderProgress=true;
+    _getHomeSliderProgress=true;
     update();
     final NetworkResponse response=await NetworkCaller().getRequest(Urls.getSlider);
-    _gethomeSliderProgress=false;
+    _getHomeSliderProgress=false;
 
     if(response.isSuccess){
       _sliderModel=SliderModel.fromJson(response.responseJson ?? {});
