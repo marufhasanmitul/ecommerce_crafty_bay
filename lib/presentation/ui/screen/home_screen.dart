@@ -1,5 +1,5 @@
+import 'package:ecommerce_crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:ecommerce_crafty_bay/presentation/ui/screen/categories.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,6 +19,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +58,21 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              const HomeSlider(),
+              GetBuilder<HomeSliderController>(
+                builder: (homeSliderController) {
+                  if(homeSliderController.getHomeSliderInProgress){
+                    return const SizedBox(
+                      height: 180,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  return HomeSlider(
+                    sliders: homeSliderController.sliderModel.data ??[],
+                  );
+                }
+              ),
               const SizedBox(
                 height: 15,
               ),

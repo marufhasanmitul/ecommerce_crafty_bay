@@ -6,6 +6,7 @@ import 'package:ecommerce_crafty_bay/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../state_holders/home_slider_controller.dart';
 import 'home_screen.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
@@ -16,6 +17,16 @@ class MainBottomNavScreen extends StatefulWidget {
 }
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
+
+  @override
+  void initState() {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<HomeSliderController>().getHomeSlider();
+    });
+
+    super.initState();
+  }
 
 
   final List<Widget> _screens = [
