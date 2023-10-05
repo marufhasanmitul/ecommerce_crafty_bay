@@ -1,4 +1,4 @@
-import 'package:ecommerce_crafty_bay/presentation/state_holders/catagory_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
