@@ -1,5 +1,8 @@
+import 'package:ecommerce_crafty_bay/data/models/product_details_data.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/widgets/product_details/size_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../utils/app_color.dart';
 import '../widgets/product_details/color_picker.dart';
@@ -7,60 +10,81 @@ import '../widgets/product_details/custom_staper_button.dart';
 import '../widgets/product_details/product_image_slider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  final int productId;
+  const ProductDetailsScreen({super.key, required this.productId});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  List<Color> colors = [
-    Colors.deepOrange,
-    Colors.amber,
-    Colors.blue,
-    Colors.yellow,
-    Colors.pink,
-    Colors.black,
-  ];
 
-  List<String> sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProductDetailsController>().getProduct(widget.productId);
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Stack(
+        child: GetBuilder<ProductDetailsController>(
+          builder: (productDetailsController) {
+            if(productDetailsController.getProductDetailsInProgress){
+             return const Center(
+               child: CircularProgressIndicator(),
+             ) ;
+            }
+            return Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
-                        const ProductImageSlider(),
-                        productDetailsAppBar,
+                        Stack(
+                          children: [
+                            ProductImageSlider(
+                              imageList: [
+                                productDetailsController.getProductDetails.img1 ??'',
+                                productDetailsController.getProductDetails.img2 ??'',
+                                productDetailsController.getProductDetails.img3 ??'',
+                                productDetailsController.getProductDetails.img4 ??'',
+                              ],
+                            ),
+                            productDetailsAppBar,
+                          ],
+                        ),
+                        productColorSizeDescription(productDetailsController.getProductDetails),
                       ],
                     ),
-                    productColorSizeDescription,
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            productDetailsAddtoCart,
-          ],
+                productDetailsAddtoCart,
+              ],
+            );
+          }
         ),
       ),
     );
   }
 
-  Padding get productColorSizeDescription {
+  Padding productColorSizeDescription(ProductDetailsData productDetails) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          productNameStaper,
-          productReview,
+          productNameStaper(productDetails.product?.title??''),
+          productReview(productDetails.product?.star?? 0),
           const Text(
             'Color',
             style: TextStyle(
@@ -72,7 +96,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SizedBox(
             height: 28,
             child: ColorPicker(
-              colors: colors,
+              colors: productDetails.color?.split(',') ?? [],
               initialColor: 0,
               onSelected: (int selectIndex) {},
             ),
@@ -91,7 +115,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SizedBox(
               height: 28,
               child: SizePicker(
-                  sizes: sizes,
+                  sizes: productDetails.size?.split(',') ?? [],
                   onSelected: (int onSelected) {},
                   initialSelected: 0)),
           const SizedBox(
@@ -105,28 +129,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(
             height: 16,
           ),
-          const Text(
-              '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                          '''),
+           Text(productDetails.des??''),
         ],
       ),
     );
   }
 
-  Row get productReview {
+  Row productReview(double reviewStar) {
     return Row(
       children: [
-        const Wrap(
+         Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.star,
               size: 18,
               color: Colors.amber,
             ),
             Text(
-              '4.5',
-              style: TextStyle(
+              '$reviewStar',
+              style: const TextStyle(
                   overflow: TextOverflow.ellipsis,
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
@@ -159,13 +181,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Row get productNameStaper {
+  Row productNameStaper(String name) {
     return Row(
       children: [
-        const Expanded(
-            child: Text(
-          'Addidas Shoe HK23454 - Black Edition',
-          style: TextStyle(
+         Expanded(
+            child: Text(name,
+          style: const TextStyle(
               fontSize: 18, fontWeight: FontWeight.w700, letterSpacing: 0.5),
         )),
         CustomStepper(

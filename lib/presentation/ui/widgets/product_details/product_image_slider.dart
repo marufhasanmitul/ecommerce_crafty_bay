@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../utils/app_color.dart';
 
 class ProductImageSlider extends StatefulWidget {
-  const ProductImageSlider({Key? key}) : super(key: key);
+  const ProductImageSlider({Key? key, required this.imageList})
+      : super(key: key);
+  final List<String> imageList;
 
   @override
   State<ProductImageSlider> createState() => _ProductImageSliderState();
@@ -25,19 +27,16 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
               onPageChanged: (int page, _) {
                 _selectedSlider.value = page;
               }),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.imageList.map((imageUrl) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 0.0),
-                    decoration: const BoxDecoration(color: Colors.black38),
-                    child: Center(
-                      child: Text(
-                        'text $i',
-                        style: const TextStyle(fontSize: 16.0),
-                      ),
-                    ));
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 0.0),
+                  decoration: BoxDecoration(
+                      color: Colors.black38,
+                      image: DecorationImage(image: NetworkImage(imageUrl)),),
+                );
               },
             );
           }).toList(),
@@ -50,7 +49,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
               valueListenable: _selectedSlider,
               builder: (context, value, _) {
                 List<Widget> list = [];
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < widget.imageList.length; i++) {
                   list.add(Container(
                     width: 12,
                     height: 12,

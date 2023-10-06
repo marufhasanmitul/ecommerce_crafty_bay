@@ -5,4 +5,5 @@ class Urls{
   static String getSlider = '$_baseUrl/ListProductSlider';
   static String categoryList = '$_baseUrl/CategoryList';
   static String listProductByRemarks(String remarks) => '$_baseUrl/ListProductByRemark/$remarks';
+  static String getProductDetails(int productId) => '$_baseUrl/ProductDetailsById/$productId';
 }

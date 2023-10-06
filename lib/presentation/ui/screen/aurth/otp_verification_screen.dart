@@ -1,6 +1,6 @@
 
 
-import 'package:ecommerce_crafty_bay/presentation/state_holders/otp_varification_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/otp_verification_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/aurth/complete_profile_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/main_bottom_nav_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/app_color.dart';

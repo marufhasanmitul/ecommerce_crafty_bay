@@ -1,3 +1,4 @@
+import 'package:ecommerce_crafty_bay/presentation/ui/utils/color_extension.dart';
 import 'package:flutter/material.dart';
 
 class ColorPicker extends StatefulWidget {
@@ -7,7 +8,7 @@ class ColorPicker extends StatefulWidget {
       required this.initialColor,
       required this.onSelected});
 
-  final List<Color> colors;
+  final List<String> colors;
   final int initialColor;
   final Function(int selectIndex) onSelected;
 
@@ -41,7 +42,7 @@ class _ColorPickerState extends State<ColorPicker> {
           },
           child: CircleAvatar(
             radius: 18,
-            backgroundColor: widget.colors[index],
+            backgroundColor:HexColor.fromHex(widget.colors[index]),
             child: _selectedColorIndex == index
                 ? const Icon(
                     Icons.done,
