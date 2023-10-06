@@ -1,6 +1,7 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/new_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/popular_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/special_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
@@ -164,12 +165,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 165,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 20,
-                    itemBuilder: (context,index){
-                      //return const ProductCard();
-                    }
+                child: GetBuilder<NewProductController>(
+                  builder: (newProductController) {
+                    return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: newProductController.getNewProductModel.data?.length ?? 0,
+                        itemBuilder: (context,index){
+                          return  ProductCard(
+                            product:newProductController.getNewProductModel.data![index],
+                          );
+                        }
+                    );
+                  }
                 ),
               )
             ],
