@@ -29,4 +29,5 @@ class CategoryData {
     data['updated_at'] = updatedAt;
     return data;
   }
+
 }

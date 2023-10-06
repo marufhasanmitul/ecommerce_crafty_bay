@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:ecommerce_crafty_bay/data/models/netowork_response.dart';
+import 'package:ecommerce_crafty_bay/data/models/network_response.dart';
 import 'package:http/http.dart';
 
 class NetworkCaller {

@@ -13,7 +13,8 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Electronics', style: TextStyle(color: Colors.black87)),
+        title:
+            const Text('Electronics', style: TextStyle(color: Colors.black87)),
         leading: const BackButton(color: Colors.black87),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -23,7 +24,7 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3, mainAxisSpacing: 20, crossAxisSpacing: 0),
           itemBuilder: (context, index) {
-            return const FittedBox(child: ProductCard());
+            //return const FittedBox(child: ProductCard());
           }),
     );
   }

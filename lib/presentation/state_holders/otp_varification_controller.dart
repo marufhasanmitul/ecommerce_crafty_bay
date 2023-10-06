@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:ecommerce_crafty_bay/data/models/netowork_response.dart';
+import 'package:ecommerce_crafty_bay/data/models/network_response.dart';
 import 'package:ecommerce_crafty_bay/data/utility/network_caller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:get/get.dart';

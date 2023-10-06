@@ -4,4 +4,5 @@ class Urls{
   static String verifyOtp(String email,String otp) =>'$_baseUrl/VerifyLogin/$email/$otp';
   static String getSlider = '$_baseUrl/ListProductSlider';
   static String categoryList = '$_baseUrl/CategoryList';
+  static String listProductByRemarks(String remarks) => '$_baseUrl/ListProductByRemark/$remarks';
 }
