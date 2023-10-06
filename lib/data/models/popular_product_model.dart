@@ -1,12 +1,12 @@
 import 'package:ecommerce_crafty_bay/data/models/product.dart';
 
-class PopularProductModel {
+class ProductModel {
   String? msg;
   List<Product>? data;
 
-  PopularProductModel({this.msg, this.data});
+  ProductModel({this.msg, this.data});
 
-  PopularProductModel.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
       data = <Product>[];

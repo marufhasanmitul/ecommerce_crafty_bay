@@ -1,6 +1,7 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:ecommerce_crafty_bay/presentation/state_holders/product_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/popular_product_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/special_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/cart_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/categories_list.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/wish_list_screen.dart';
@@ -26,7 +27,8 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<HomeSliderController>().getHomeSlider();
       Get.find<HomeCategoryController>().getHomeCategory();
-      Get.find<ProductController>().getPopularProduct();
+      Get.find<PopularProductController>().getPopularProduct();
+      Get.find<SpecialProductController>().getSpecialProduct();
     });
 
     super.initState();

@@ -1,7 +1,8 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:ecommerce_crafty_bay/presentation/state_holders/product_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/popular_product_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/special_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,10 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 165,
-                child: GetBuilder<ProductController>(
+                child: GetBuilder<PopularProductController>(
                   builder: (productController) {
                     if(productController.getPopularProductInProgress){
                       return const Center(child: CircularProgressIndicator(),);
@@ -144,12 +141,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 165,
-                child: ListView.builder(
-                   scrollDirection: Axis.horizontal,
-                    itemCount: 20,
-                    itemBuilder: (context,index){
-                      //return const ProductCard();
+                child: GetBuilder<SpecialProductController>(
+                  builder: (specialProductController) {
+                    if(specialProductController.getSpecialProductInProgress){
+                      return const Center(child: CircularProgressIndicator(),);
                     }
+                    return ListView.builder(
+                       scrollDirection: Axis.horizontal,
+                        itemCount: specialProductController.getSpecialProductModel.data?.length ?? 0,
+                        itemBuilder: (context,index){
+                          return  ProductCard(
+                            product:specialProductController.getSpecialProductModel.data![index],
+                          );
+                        }
+                    );
+                  }
                 ),
               ),
               SectionHeader(

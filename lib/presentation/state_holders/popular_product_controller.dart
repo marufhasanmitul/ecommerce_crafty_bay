@@ -5,15 +5,15 @@ import 'package:get/get.dart';
 
 import '../../data/utility/urls.dart';
 
-class ProductController extends GetxController{
+class PopularProductController extends GetxController{
   bool _getPopularProductInProgress = false;
   String _errorMessage='';
 
-  PopularProductModel _popularProductModel= PopularProductModel();
+  ProductModel _popularProductModel= ProductModel();
   
   bool get getPopularProductInProgress=> _getPopularProductInProgress;
   String get getErrorMessage=>_errorMessage;
-  PopularProductModel get getPopularProductModel=> _popularProductModel;
+  ProductModel get getPopularProductModel=> _popularProductModel;
 
   
   Future<bool> getPopularProduct()async{
@@ -22,7 +22,7 @@ class ProductController extends GetxController{
     final NetworkResponse response=await NetworkCaller().getRequest(Urls.listProductByRemarks('popular'));
     _getPopularProductInProgress=false;
     if(response.isSuccess){
-      _popularProductModel=PopularProductModel.fromJson(response.responseJson?? {} );
+      _popularProductModel=ProductModel.fromJson(response.responseJson?? {} );
       update();
       return true;
     }else{
