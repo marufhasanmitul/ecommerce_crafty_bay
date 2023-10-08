@@ -10,11 +10,13 @@ class ProductDetailsController extends GetxController{
   bool _getProductDetailsInProgress = false;
   ProductDetailsData _productDetailsData= ProductDetailsData();
   String _errorMessage='';
-  final List<String>  _availableColors = [];
+   List<String>  _availableColors = [];
+   List<String>  _availableSize = [];
 
 
 
   List<String> get availableColors => _availableColors;
+  List<String> get availableSize => _availableSize;
   bool get getProductDetailsInProgress=> _getProductDetailsInProgress;
   String get getErrorMessage=>_errorMessage;
 
@@ -28,7 +30,8 @@ class ProductDetailsController extends GetxController{
     _getProductDetailsInProgress=false;
     if(response.isSuccess){
       _productDetailsData=ProductDetailsModel.fromJson(response.responseJson??{}).data!.first;
-
+      _convertStringToColor(_productDetailsData.color??'');
+      _convertStringToSize(_productDetailsData.size??'');
       update();
 
 
@@ -41,6 +44,19 @@ class ProductDetailsController extends GetxController{
 
 
   }
+
+
+
+  void _convertStringToSize(String sizes){
+    _availableSize =sizes.split(',');
+  }
+
+  void _convertStringToColor(String color){
+    _availableColors=color.split(',');
+
+  }
+
+
 
 
 

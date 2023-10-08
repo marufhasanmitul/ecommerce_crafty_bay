@@ -1,9 +1,9 @@
 import 'package:ecommerce_crafty_bay/data/models/product_details_data.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/widgets/product_details/size_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../utils/app_color.dart';
 import '../widgets/product_details/color_picker.dart';
 import '../widgets/product_details/custom_staper_button.dart';
@@ -20,7 +20,8 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
 
-
+  int _selectedColorIndex = 0;
+  int _selectedSizeIndex = 0;
 
 
   @override
@@ -63,12 +64,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             productDetailsAppBar,
                           ],
                         ),
-                        productColorSizeDescription(productDetailsController.getProductDetails),
+                        productColorSizeDescription(productDetailsController),
                       ],
                     ),
                   ),
                 ),
-                productDetailsAddtoCart,
+                productDetailsAddToCart(productDetailsController),
               ],
             );
           }
@@ -77,14 +78,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Padding productColorSizeDescription(ProductDetailsData productDetails) {
+  Padding productColorSizeDescription(ProductDetailsController productDetailsController) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          productNameStaper(productDetails.product?.title??''),
-          productReview(productDetails.product?.star?? 0),
+          productNameStaper(productDetailsController.getProductDetails.product?.title??''),
+          productReview(productDetailsController.getProductDetails.product?.star?? 0),
           const Text(
             'Color',
             style: TextStyle(
@@ -96,9 +97,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SizedBox(
             height: 28,
             child: ColorPicker(
-              colors: productDetails.color?.split(',') ?? [],
+              colors: productDetailsController.availableColors,
               initialColor: 0,
-              onSelected: (int selectIndex) {},
+              onSelected: (int selectIndex) {
+                _selectedColorIndex=selectIndex;
+              },
             ),
           ),
           const SizedBox(
@@ -115,8 +118,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SizedBox(
               height: 28,
               child: SizePicker(
-                  sizes: productDetails.size?.split(',') ?? [],
-                  onSelected: (int onSelected) {},
+                  sizes: productDetailsController.availableSize,
+                  onSelected: (int onSelected) {
+                    _selectedSizeIndex=onSelected;
+                  },
                   initialSelected: 0)),
           const SizedBox(
             height: 16,
@@ -129,7 +134,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(
             height: 16,
           ),
-           Text(productDetails.des??''),
+           Text(productDetailsController.getProductDetails.des??''),
         ],
       ),
     );
@@ -213,7 +218,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Container get productDetailsAddtoCart {
+  Container productDetailsAddToCart(ProductDetailsController productDetailsController) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
@@ -222,44 +227,56 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),
           )),
-      child: addToCartBotton,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Price',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Colors.black54),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                '\$1000',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: AppColors.primaryColor),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: 120,
+            child: GetBuilder<AddToCartController>(
+                builder: (addToCartController) {
+                  if(addToCartController.addToCartInProgress){
+                    return const Center(child: CircularProgressIndicator(),);
+                  }
+                  return ElevatedButton(
+                    onPressed: () async{
+                      final result= await addToCartController.getAddToCart(productDetailsController.getProductDetails.productId!, productDetailsController.availableColors[_selectedColorIndex],  productDetailsController.availableSize[_selectedSizeIndex]);
+                      if(result){
+                        Get.snackbar('Added to cart',
+                            'This product has been added to cart list',
+                            snackPosition: SnackPosition.BOTTOM);
+                      }
+                    },
+                    child: const Text('Add to cart'),
+                  );
+                }
+            ),
+          )
+        ],
+      ),
     );
   }
 
-  Row get addToCartBotton {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Price',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                  color: Colors.black54),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Text(
-              '\$1000',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  color: AppColors.primaryColor),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: 120,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Add to cart'),
-          ),
-        )
-      ],
-    );
-  }
+
 }

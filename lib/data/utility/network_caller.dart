@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:ecommerce_crafty_bay/data/models/network_response.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:http/http.dart';
 
 class NetworkCaller {
@@ -26,20 +27,25 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-  Future<NetworkResponse> postRequest(
-      String url, Map<String, dynamic> body) async {
+  Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body) async {
     try {
-      Response response = await post(Uri.parse(url),
+      Response response = await post(
+          Uri.parse(url),
           headers: {
             'Content-Type': 'application/json',
-            // 'token': AuthUtility.userInfo.token.toString()
+            'token': AuthController.accessToken.toString()
           },
-          body: jsonEncode(body));
+          body: jsonEncode(body)
+      );
 
-      if (response.statusCode == 200 &&
-          jsonDecode(response.body)['msg'] == 'success') {
-        return NetworkResponse(
-            true, response.statusCode, jsonDecode(response.body));
+      log(response.statusCode.toString());
+      log(response.body);
+
+      if (response.statusCode == 200 && jsonDecode(response.body)['msg'] == 'success') {
+
+        return NetworkResponse( true, response.statusCode,  jsonDecode(response.body) );
+
+
       } else if (response.statusCode == 401) {
         gotoLogin();
       } else {

@@ -7,7 +7,7 @@ class AuthController {
 
 
 
-  String? get accessToken => _accessToken;
+  static String? get accessToken => _accessToken;
 
 
  static Future<void> setAccessToken(String token) async {
