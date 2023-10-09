@@ -1,5 +1,4 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:ecommerce_crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +34,7 @@ class _WishListScreenState extends State<WishListScreen> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3, mainAxisSpacing: 20, crossAxisSpacing: 0),
             itemBuilder: (context, index) {
-              //return const FittedBox(child: ProductCard());
+              //return  FittedBox(child: ProductCard());
             }),
       ),
     );

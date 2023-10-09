@@ -1,4 +1,3 @@
-import 'package:ecommerce_crafty_bay/data/models/product_details_data.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/widgets/product_details/size_picker.dart';

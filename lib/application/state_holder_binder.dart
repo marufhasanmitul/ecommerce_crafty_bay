@@ -9,6 +9,7 @@ import '../presentation/state_holders/main_bottom_nav_controller.dart';
 import '../presentation/state_holders/new_product_controller.dart';
 import '../presentation/state_holders/popular_product_controller.dart';
 import '../presentation/state_holders/product_details_controller.dart';
+import '../presentation/state_holders/product_list_controller.dart';
 import '../presentation/state_holders/special_product_controller.dart';
 
 class StateHolderBinder extends Bindings{
@@ -24,6 +25,7 @@ class StateHolderBinder extends Bindings{
     Get.put(NewProductController());
     Get.put(ProductDetailsController());
     Get.put(AddToCartController());
+    Get.put(ProductListController());
 
   }
 
