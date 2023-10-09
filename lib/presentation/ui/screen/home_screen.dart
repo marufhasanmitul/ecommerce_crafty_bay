@@ -107,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           return CategoryCard(
                             OnTap:(){
                               Get.to(ProductListScreen(
+                                name:categoryController.getCategory.data![index].categoryName ,
                                 categoryId: categoryController.getCategory.data![index].id,
                               ));
                             },
@@ -121,7 +122,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'Popular',
-                onTap: () {},
+                onTap: () {
+
+                    Get.to(ProductListScreen(
+                      name: "Popular",
+                      productModel: Get.find<PopularProductController>().getPopularProductModel,
+                    ));
+
+
+                },
               ),
               SizedBox(
                 height: 165,
@@ -145,7 +154,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'Special',
-                onTap: () {},
+                onTap: () {
+
+                  Get.to(ProductListScreen(
+                    name: "Special",
+                    productModel: Get.find<SpecialProductController>().getSpecialProductModel,
+                  ));
+                },
               ),
               SizedBox(
                 height: 165,
@@ -168,7 +183,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'New',
-                onTap: () {},
+                onTap: () {
+                  Get.to(ProductListScreen(
+                    name: "New",
+                    productModel: Get.find<NewProductController>().getNewProductModel,
+                  ));
+                },
               ),
               SizedBox(
                 height: 165,

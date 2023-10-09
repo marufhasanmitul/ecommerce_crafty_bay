@@ -57,6 +57,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                          child: CategoryCard(
                            OnTap: (){
                              Get.to( ProductListScreen(
+                               name:categoryController.getCategory.data![index].categoryName ,
                                categoryId:categoryController.getCategory.data![index].id,
                              ));
                            },

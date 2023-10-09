@@ -13,7 +13,7 @@ class ProductListController extends GetxController{
   String _errorMessage='';
 
 
-  bool get getProductDetailsInProgress=> _productListInProgress;
+  bool get getProductListInProgress=> _productListInProgress;
   String get getErrorMessage=>_errorMessage;
   ProductModel get productList=> _productListModel;
 
@@ -36,7 +36,10 @@ class ProductListController extends GetxController{
 
   }
 
-
+void setProducts(ProductModel productModel){
+  _productListModel=productModel;
+  update();
+}
 
 
 }
