@@ -5,12 +5,22 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import '../presentation/ui/screen/splash_screen.dart';
 
-class CraftBay extends StatelessWidget {
+class CraftBay extends StatefulWidget {
+  static GlobalKey<NavigatorState> globalKey=GlobalKey<NavigatorState>();
   const CraftBay({Key? key}) : super(key: key);
+
+  @override
+  State<CraftBay> createState() => _CraftBayState();
+}
+
+class _CraftBayState extends State<CraftBay> {
+
+
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        navigatorKey:CraftBay.globalKey,
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),
         initialBinding:StateHolderBinder(),

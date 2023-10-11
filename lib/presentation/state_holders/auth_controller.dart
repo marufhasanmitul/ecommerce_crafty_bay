@@ -21,6 +21,10 @@ class AuthController {
     _accessToken= sharedPreferences.getString('access-token');
 
   }
+  static Future<void>clear()async{
+   final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+   await sharedPreferences.clear();
+  }
 
   static bool get isLogin{
     return _accessToken != null;
