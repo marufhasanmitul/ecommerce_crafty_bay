@@ -1,5 +1,4 @@
 import 'package:ecommerce_crafty_bay/data/models/popular_product_model.dart';
-import 'package:ecommerce_crafty_bay/data/models/product.dart';
 import 'package:get/get.dart';
 
 import '../../data/models/network_response.dart';

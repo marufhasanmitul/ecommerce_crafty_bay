@@ -1,4 +1,5 @@
 import 'package:ecommerce_crafty_bay/data/models/car_list_data.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/delete_cart_list_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/widgets/product_details/custom_staper_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,7 +72,11 @@ class CartProductCard extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+
+                            deleteAlert(context);
+
+                          },
                           icon: const Icon(Icons.delete_outline))
                     ],
                   ),
@@ -108,6 +113,43 @@ class CartProductCard extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  void deleteAlert(BuildContext context) {
+       showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: const Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(Icons.warning),
+                SizedBox(width: 15,),
+                Text("Delete"),
+              ],
+            ),
+            content: const Text("Are You sure You want to delete Product"),
+            actions: [
+              TextButton(
+                  onPressed:(){
+                    Get.find<DeleteCartListController>().getDeleteCartListIem(cartData.productId?? 0);
+                    Get.find<CartListController>().getCartList();
+                    Get.back();
+                  },
+                  child: const Text("Yes")
+              ),
+              TextButton(
+                  onPressed:(){
+                    Get.back();
+                  },
+                  child: const Text("No")
+              ),
+            ],
+
+          );
+        }
     );
   }
 }
