@@ -66,7 +66,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text("A 4 Digit OTP Code has been Send",
+                Text("A 6 Digit OTP Code has been Send",
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
@@ -77,7 +77,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 PinCodeTextField(
 
                   appContext: context,
-                  length: 4,
+                  length: 6,
                   obscureText: false,
                   animationType: AnimationType.fade,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -105,7 +105,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     return true;
                   },
                   validator: (value) {
-                    if (value.toString().isEmpty || value!.length != 4) {
+                    if (value.toString().isEmpty || value!.length != 6) {
                       return "Please Enter valid Pin code";
                     }
                     return null;

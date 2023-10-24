@@ -21,6 +21,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 0;
+  int quanity=1;
 
 
   @override
@@ -83,7 +84,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          productNameStaper(productDetailsController.getProductDetails.product?.title??''),
+          productNameStaper(
+              productDetailsController.getProductDetails.product?.title??''
+          ),
           productReview(productDetailsController.getProductDetails.product?.star?? 0),
           const Text(
             'Color',
@@ -139,7 +142,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Row productReview(double reviewStar) {
+  Row productReview(int reviewStar) {
     return Row(
       children: [
          Wrap(
@@ -198,7 +201,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             upperLimit: 10,
             stepValue: 1,
             value: 1,
-            onChange: (newValue) {})
+            onChange: (newValue) {
+              quanity=newValue;
+            })
       ],
     );
   }
@@ -260,7 +265,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   }
                   return ElevatedButton(
                     onPressed: () async{
-                      final result= await addToCartController.getAddToCart(productDetailsController.getProductDetails.productId!, productDetailsController.availableColors[_selectedColorIndex],  productDetailsController.availableSize[_selectedSizeIndex]);
+                      final result= await addToCartController.getAddToCart(
+
+                        productDetailsController.getProductDetails.productId!,
+                        productDetailsController.availableColors[_selectedColorIndex],
+                        productDetailsController.availableSize[_selectedSizeIndex],
+                        quanity
+
+                      );
                       if(result){
                         Get.snackbar('Added to cart',
                             'This product has been added to cart list',

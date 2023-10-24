@@ -1,5 +1,4 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/car_list_controller.dart';
-import 'package:ecommerce_crafty_bay/presentation/state_holders/delete_cart_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,8 +58,8 @@ class _CartScreenState extends State<CartScreen> {
             return Column(
               children: [
                 Expanded(
-                  child: GetBuilder<DeleteCartListController>(
-                    builder: (deleteCartListController) {
+                  child: GetBuilder<CartListController>(
+                    builder: (cartListController) {
                       return ListView.builder(
                         itemCount: cartListController.getCartListModel.data?.length ?? 0,
                         itemBuilder: (context, index) {
