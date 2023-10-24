@@ -13,7 +13,7 @@ class EmailVerificationController extends GetxController{
     _emailVerificationInProgress=true;
     update();
     final NetworkResponse response=await NetworkCaller().getRequest(Urls.verifyEmail(email));
-    _emailVerificationInProgress=true;
+    _emailVerificationInProgress=false;
     update();
     if(response.isSuccess){
       _message=response.responseJson?['data'] ?? '';

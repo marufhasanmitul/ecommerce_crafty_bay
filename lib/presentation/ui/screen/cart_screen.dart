@@ -1,4 +1,5 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/car_list_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -109,7 +110,12 @@ class _CartScreenState extends State<CartScreen> {
                       SizedBox(
                         width: 120,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if(Get.find<CartListController>().getCartListModel.data?.isNotEmpty ?? false){
+                              Get.to(()=> CheckOutScreen());
+                            }
+
+                          },
                           child: const Text('Checkout'),
                         ),
                       )

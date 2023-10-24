@@ -9,5 +9,6 @@ class Urls{
   static String getProductListByCategory(int productId) => '$_baseUrl/ListProductByCategory/$productId';
   static String deleteCartListUrl(int productId) => '$_baseUrl/DeleteCartList/$productId';
   static const String addToCart = '$_baseUrl/CreateCartList';
+  static const String invoiceCreateUrl = '$_baseUrl/InvoiceCreate';
   static String getCartListUrl = '$_baseUrl/CartList';
 }
