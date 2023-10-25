@@ -204,7 +204,7 @@ craftybay_ecommerce_application/
 
 ## Contributors
 
-- [Md Alhaz Mondal Hredhay](https://github.com/hredhayxz)
+- [Md Maruf Hasan](https://github.com/marufhasanmitul)
 
 ## Special Thanks
 
