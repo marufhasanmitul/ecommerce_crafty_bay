@@ -7,11 +7,13 @@ import 'package:get/get.dart';
 import '../presentation/state_holders/add_to_cart_controller.dart';
 import '../presentation/state_holders/car_list_controller.dart';
 import '../presentation/state_holders/create_invoice_controller.dart';
+import '../presentation/state_holders/create_profile_screen_controller.dart';
 import '../presentation/state_holders/main_bottom_nav_controller.dart';
 import '../presentation/state_holders/new_product_controller.dart';
 import '../presentation/state_holders/popular_product_controller.dart';
 import '../presentation/state_holders/product_details_controller.dart';
 import '../presentation/state_holders/product_list_controller.dart';
+import '../presentation/state_holders/read_profile_controller.dart';
 import '../presentation/state_holders/special_product_controller.dart';
 
 class StateHolderBinder extends Bindings{
@@ -30,6 +32,8 @@ class StateHolderBinder extends Bindings{
     Get.put(ProductListController());
     Get.put(CartListController());
     Get.put(CreateInvoiceController());
+    Get.put(ReadProfileController());
+    Get.put(CreateProfileScreenController());
 
 
   }

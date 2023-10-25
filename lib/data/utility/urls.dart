@@ -11,4 +11,7 @@ class Urls{
   static const String addToCart = '$_baseUrl/CreateCartList';
   static const String invoiceCreateUrl = '$_baseUrl/InvoiceCreate';
   static String getCartListUrl = '$_baseUrl/CartList';
+
+  static String readProfile = '$_baseUrl/ReadProfile';
+  static String createProfile = '$_baseUrl/CreateProfile';
 }

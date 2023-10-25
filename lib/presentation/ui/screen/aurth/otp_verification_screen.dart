@@ -7,6 +7,7 @@ import 'package:ecommerce_crafty_bay/presentation/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../state_holders/read_profile_controller.dart';
 import '../../utils/image_assets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:get/get.dart';
@@ -175,7 +176,11 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   Future<void> verifyOtp(OtpVerificationController controller)async{
     final response=await controller.verifyOtp(widget.email, pinCodeEditingController.text.trim());
     if(response==true){
-      Get.offAll(()=>const MainBottomNavScreen());
+      await Get.find<ReadProfileController>().readProfileData();
+      Get.find<ReadProfileController>().readProfileModel.data == null
+          ? Get.offAll(() => CreateProfileScreen())
+          : Get.offAll(() => const MainBottomNavScreen());
+
     }else{
       if(mounted){
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Otp Verification failed")));
