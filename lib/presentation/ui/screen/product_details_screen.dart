@@ -1,6 +1,8 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/product_details_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/create_review_screen.dart';
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/reviews_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/widgets/product_details/size_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -171,7 +173,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ],
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.to( ReviewScreen(productId: productId));
+          },
           child: const Text(
             'Review',
             style: TextStyle(

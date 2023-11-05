@@ -16,6 +16,7 @@ import '../presentation/state_holders/popular_product_controller.dart';
 import '../presentation/state_holders/product_details_controller.dart';
 import '../presentation/state_holders/product_list_controller.dart';
 import '../presentation/state_holders/read_profile_controller.dart';
+import '../presentation/state_holders/review_product_controller.dart';
 import '../presentation/state_holders/special_product_controller.dart';
 import '../presentation/state_holders/wish_list_controller.dart';
 
@@ -40,6 +41,7 @@ class StateHolderBinder extends Bindings{
     Get.put(WishListScreenController());
     Get.put(DeleteWishListProductController());
     Get.put(CreateWishListController());
+    Get.put(ReviewProductController());
 
 
   }
