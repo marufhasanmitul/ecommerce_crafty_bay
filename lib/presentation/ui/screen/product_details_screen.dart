@@ -1,4 +1,5 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/create_wish_list_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/widgets/product_details/size_picker.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                child: CircularProgressIndicator(),
              ) ;
             }
+            if(productDetailsController.getProductModel.data!.isEmpty){
+              return const Center(
+                child: Text("Data is Empty"),
+              ) ;
+            }
+            
             return Column(
               children: [
                 Expanded(
@@ -87,7 +94,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           productNameStaper(
               productDetailsController.getProductDetails.product?.title??''
           ),
-          productReview(productDetailsController.getProductDetails.product?.star?? 0),
+          productReview(productDetailsController.getProductDetails.product?.star?? 0,productDetailsController.getProductDetails.product?.id?? 0),
           const Text(
             'Color',
             style: TextStyle(
@@ -142,7 +149,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Row productReview(int reviewStar) {
+  Row productReview(int reviewStar,int productId) {
     return Row(
       children: [
          Wrap(
@@ -173,16 +180,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 fontWeight: FontWeight.w500),
           ),
         ),
-        const Card(
-          color: AppColors.primaryColor,
-          child: Padding(
-            padding: EdgeInsets.all(2.0),
-            child: Icon(
-              Icons.favorite_border,
-              size: 16,
-              color: Colors.white,
-            ),
-          ),
+        GetBuilder<CreateWishListController>(
+          builder: (createWishListController) {
+            return InkWell(
+              onTap: ()async{
+                 await createWishListController.createWishList(productId);
+                 Get.snackbar("Wish List", "Added WishList");
+              },
+              child: const Card(
+                color: AppColors.primaryColor,
+                child: Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: Icon(
+                    Icons.favorite_border,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            );
+          }
         )
       ],
     );

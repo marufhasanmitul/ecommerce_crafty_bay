@@ -1,9 +1,7 @@
 import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../state_holders/wish_list_controller.dart';
-import '../widgets/product_card.dart';
 import '../widgets/wish_list_product_card.dart';
 
 class WishListScreen extends StatefulWidget {

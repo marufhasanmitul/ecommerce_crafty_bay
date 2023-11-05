@@ -9,6 +9,7 @@ import '../../data/utility/urls.dart';
 class ProductDetailsController extends GetxController{
   bool _getProductDetailsInProgress = false;
   ProductDetailsData _productDetailsData= ProductDetailsData();
+  ProductDetailsModel _detailsModel=ProductDetailsModel();
   String _errorMessage='';
    List<String>  _availableColors = [];
    List<String>  _availableSize = [];
@@ -21,6 +22,7 @@ class ProductDetailsController extends GetxController{
   String get getErrorMessage=>_errorMessage;
 
   ProductDetailsData get getProductDetails=> _productDetailsData;
+  ProductDetailsModel get getProductModel=> _detailsModel;
 
 
   Future<bool> getProduct(int id)async{
@@ -30,6 +32,7 @@ class ProductDetailsController extends GetxController{
     _getProductDetailsInProgress=false;
     if(response.isSuccess){
       _productDetailsData=ProductDetailsModel.fromJson(response.responseJson??{}).data!.first;
+      _detailsModel=ProductDetailsModel.fromJson(response.responseJson??{});
       _convertStringToColor(_productDetailsData.color??'');
       _convertStringToSize(_productDetailsData.size??'');
       update();
