@@ -8,6 +8,7 @@ import '../presentation/state_holders/add_to_cart_controller.dart';
 import '../presentation/state_holders/car_list_controller.dart';
 import '../presentation/state_holders/create_invoice_controller.dart';
 import '../presentation/state_holders/create_profile_screen_controller.dart';
+import '../presentation/state_holders/create_review_contorller.dart';
 import '../presentation/state_holders/create_wish_list_controller.dart';
 import '../presentation/state_holders/delete_wish_list_controller.dart';
 import '../presentation/state_holders/main_bottom_nav_controller.dart';
@@ -42,6 +43,7 @@ class StateHolderBinder extends Bindings{
     Get.put(DeleteWishListProductController());
     Get.put(CreateWishListController());
     Get.put(ReviewProductController());
+    Get.put(CreateReviewController());
 
 
   }

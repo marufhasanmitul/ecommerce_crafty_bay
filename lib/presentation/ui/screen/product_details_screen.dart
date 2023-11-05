@@ -174,7 +174,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         TextButton(
           onPressed: () {
-            Get.to( ReviewScreen(productId: productId));
+            Get.to( ReviewScreen(
+              productId: productId,
+              rating: reviewStar,)
+            );
           },
           child: const Text(
             'Review',

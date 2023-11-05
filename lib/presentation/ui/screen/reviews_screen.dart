@@ -1,3 +1,4 @@
+import 'package:ecommerce_crafty_bay/presentation/state_holders/create_review_contorller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/review_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/create_review_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/widgets/circular_icon_button.dart';
@@ -7,7 +8,8 @@ import 'package:get/get.dart';
 import '../utils/app_color.dart';
 class ReviewScreen extends StatefulWidget {
   final int productId;
-  const ReviewScreen({Key? key, required this.productId}) : super(key: key);
+  final int rating;
+  const ReviewScreen({Key? key, required this.productId, required this.rating}) : super(key: key);
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
@@ -99,24 +101,27 @@ class _ReviewScreenState extends State<ReviewScreen> {
               color: AppColors.primaryColor.withOpacity(0.1),
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
             ),
-            child: Row(
-              children: [
-                 GetBuilder<ReviewProductController>(
-                   builder: (controller) {
-                     return Text("Review (${controller.reviewProduct.data?.length??0})");
-                   }
-                 ),
-                const Spacer(),
-                ElevatedButton(
-                    onPressed:(){
-                      Get.to(const CreateReviewScreen());
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder()
-                    ),
-                    child: const Center(child: Icon(Icons.add)),
-                )
-              ],
+            child: GetBuilder<ReviewProductController>(
+              builder: (controller) {
+                return Row(
+                  children: [
+                    Text("Review (${controller.reviewProduct.data?.length??0})"),
+                    const Spacer(),
+                    ElevatedButton(
+                        onPressed:(){
+                          Get.to( CreateReviewScreen(
+                            productId:widget.productId,
+                            rating:widget.rating,
+                          ));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const CircleBorder()
+                        ),
+                        child: const Center(child: Icon(Icons.add)),
+                    )
+                  ],
+                );
+              }
             ),
           )
         ],
