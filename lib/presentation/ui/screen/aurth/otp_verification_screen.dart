@@ -1,5 +1,6 @@
 
 
+import 'package:ecommerce_crafty_bay/presentation/state_holders/email_verification_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/otp_verification_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/aurth/complete_profile_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/main_bottom_nav_screen.dart';
@@ -25,14 +26,14 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
 
 
-  final OtpVerificationController _otpVerificationController=Get.put(OtpVerificationController());
+  //final OtpVerificationController _otpVerificationController=Get.put(OtpVerificationController());
 
 
 
   @override
   void initState() {
     super.initState();
-    _otpVerificationController.timerCode();
+    Get.find<EmailVerificationController>().timerCode();
   }
   final _formKey = GlobalKey<FormState>();
 
@@ -146,9 +147,9 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                       'This Code will expire in ',
                       style: TextStyle(color: Colors.grey),
                     ),
-                    GetBuilder<OtpVerificationController>(
-                      builder: (GetxController controller){
-                        return Text("${_otpVerificationController.secondsRemaining} S",style: const TextStyle(
+                    GetBuilder<EmailVerificationController>(
+                      builder: (controller){
+                        return Text("${controller.secondsRemaining} S",style: const TextStyle(
                             fontSize: 17,
                             color: AppColors.primaryColor
                         ),);
@@ -157,12 +158,18 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     ),
                   ],
                 ),
-                TextButton(
-                    onPressed: _otpVerificationController.enableResend ? _otpVerificationController.resendCode : null,
-                    child: const Text(
-                      'Resend Code',
-                      style: TextStyle(color: Colors.grey),
-                    ))
+                GetBuilder<EmailVerificationController>(
+                  builder: (controller) {
+                    return TextButton(
+                        onPressed: ()async{
+                         if(controller.enableResend){
+                            await controller.verifyEmail(widget.email);
+                            controller.resendCode();
+                         }
+                        },
+                        child: controller.enableResend? Text('Resend Code', style: TextStyle(color: Colors.green),):Text('Resend Code', style: TextStyle(color: Colors.grey),));
+                  }
+                )
               ],
             ),
           ),
@@ -192,7 +199,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   dispose(){
-    _otpVerificationController.timer?.cancel();
+    Get.find<EmailVerificationController>().timer?.cancel();
     super.dispose();
   }
 

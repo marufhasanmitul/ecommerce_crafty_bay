@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'package:ecommerce_crafty_bay/data/models/create_wish_list_model.dart';
 import 'package:ecommerce_crafty_bay/data/models/network_response.dart';
 import 'package:ecommerce_crafty_bay/data/utility/network_caller.dart';
 import 'package:get/get.dart';

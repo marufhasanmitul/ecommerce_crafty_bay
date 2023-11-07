@@ -95,8 +95,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   }
 
   Future<void> verifyEmail(EmailVerificationController controller) async {
-    final response =
-    await controller.verifyEmail(_emailTextEditingController.text.trim());
+    final response = await controller.verifyEmail(_emailTextEditingController.text.trim());
+
     if (response) {
       Get.to(() =>  OTPVerificationScreen(email: _emailTextEditingController.text.trim(),));
     } else {

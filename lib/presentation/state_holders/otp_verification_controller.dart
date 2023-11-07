@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:ecommerce_crafty_bay/data/models/network_response.dart';
 import 'package:ecommerce_crafty_bay/data/utility/network_caller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/auth_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/state_holders/email_verification_controller.dart';
 import 'package:get/get.dart';
 import '../../data/utility/urls.dart';
 
@@ -39,41 +40,4 @@ class OtpVerificationController extends GetxController{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  Timer? timer;
-  int secondsRemaining = 120;
-  bool enableResend = false;
-
-  void timerCode(){
-    timer=Timer.periodic(const Duration(seconds: 1), (_) {
-      if(secondsRemaining!=0){
-        secondsRemaining--;
-        update();
-      }else{
-        enableResend=true;
-        update();
-      }
-    });
-  }
-
-  void resendCode() {
-    //other code here
-    secondsRemaining = 120;
-    enableResend = false;
-    update();
-  }
 }

@@ -40,7 +40,7 @@ class _HomeSliderState extends State<HomeSlider> {
                     child: Center(
                       child: Stack(
                           children: [
-                            Image.network(sliderData.image?? ''),
+                            Image.network(sliderData.image?? '',height: double.infinity,width: double.infinity,fit: BoxFit.cover,),
                             Positioned(
                               bottom: 0,
                                 child: Text(

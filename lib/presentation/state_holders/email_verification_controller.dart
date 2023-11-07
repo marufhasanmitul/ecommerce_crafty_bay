@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ecommerce_crafty_bay/data/models/network_response.dart';
 import 'package:ecommerce_crafty_bay/data/utility/network_caller.dart';
 import 'package:ecommerce_crafty_bay/data/utility/urls.dart';
@@ -21,7 +23,35 @@ class EmailVerificationController extends GetxController{
     }else{
       return false;
     }
+
+
   }
+
+  Timer? timer;
+  int secondsRemaining = 120;
+  bool enableResend = false;
+
+  void timerCode(){
+    timer=Timer.periodic(const Duration(seconds: 1), (_) {
+      if(secondsRemaining!=0){
+        secondsRemaining--;
+        update();
+      }else{
+        enableResend=true;
+        update();
+      }
+    });
+  }
+
+  void resendCode() {
+    //other code here
+    //await verifyEmail (mail);
+    secondsRemaining = 120;
+    enableResend = false;
+
+    update();
+  }
+
 
 
 
