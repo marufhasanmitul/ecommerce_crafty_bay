@@ -1,4 +1,6 @@
+import 'package:ecommerce_crafty_bay/presentation/state_holders/car_list_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 class WebViewScreen extends StatefulWidget {
   const WebViewScreen({super.key, required this.paymentUrl});
@@ -18,7 +20,11 @@ class _WebViewScreenState extends State<WebViewScreen> {
           // Update loading bar.
         },
         onPageStarted: (String url) {},
-        onPageFinished: (String url) {},
+        onPageFinished: (String url) {
+          if(url.endsWith("tran_type=success")){
+            navigateBack();
+          }
+        },
         onWebResourceError: (WebResourceError error) {},
         onNavigationRequest: (NavigationRequest request) {
           if (request.url.startsWith('https://www.youtube.com/')) {
@@ -40,5 +46,11 @@ class _WebViewScreenState extends State<WebViewScreen> {
 
       ) ,
     );
+  }
+
+  void navigateBack(){
+    Navigator.pop(context);
+    Get.snackbar('Payment Successful','Your Order has been confirmed',snackPosition: SnackPosition.BOTTOM);
+    Get.find<CartListController>().getCartList();
   }
 }

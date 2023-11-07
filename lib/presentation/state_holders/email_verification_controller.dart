@@ -44,8 +44,6 @@ class EmailVerificationController extends GetxController{
   }
 
   void resendCode() {
-    //other code here
-    //await verifyEmail (mail);
     secondsRemaining = 120;
     enableResend = false;
 
