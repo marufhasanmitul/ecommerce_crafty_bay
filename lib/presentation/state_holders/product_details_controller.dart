@@ -30,9 +30,14 @@ class ProductDetailsController extends GetxController{
     update();
     final NetworkResponse response=await NetworkCaller().getRequest(Urls.getProductDetails(id));
     _getProductDetailsInProgress=false;
+
     if(response.isSuccess){
-      _productDetailsData=ProductDetailsModel.fromJson(response.responseJson??{}).data!.first;
+
       _detailsModel=ProductDetailsModel.fromJson(response.responseJson??{});
+
+
+      _productDetailsData=ProductDetailsModel.fromJson(response.responseJson??{}).data!.first;
+
       _convertStringToColor(_productDetailsData.color??'');
       _convertStringToSize(_productDetailsData.size??'');
       update();
@@ -40,7 +45,7 @@ class ProductDetailsController extends GetxController{
 
       return true;
     }else{
-      _errorMessage=' Product Details fetch failed! Try again.';
+      _errorMessage='Empty Product';
       update();
       return false;
     }

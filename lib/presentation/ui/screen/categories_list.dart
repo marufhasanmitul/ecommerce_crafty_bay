@@ -56,7 +56,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                       return FittedBox(
                          child: CategoryCard(
                            OnTap: (){
-                             Get.to( ProductListScreen(
+                             Get.to(()=> ProductListScreen(
                                name:categoryController.getCategory.data![index].categoryName ,
                                categoryId:categoryController.getCategory.data![index].id,
                              ));

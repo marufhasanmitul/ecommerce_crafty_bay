@@ -45,7 +45,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         builder: (productListController) {
           if(productListController.getProductListInProgress){
             return const Center(child: CircularProgressIndicator(),);
-          }else if( productListController.productList.data!.isEmpty){
+          }else if( productListController.productList.data?.isEmpty??true){
             return const Center(child: Text("Product Empty"),);
           }
           return GridView.builder(

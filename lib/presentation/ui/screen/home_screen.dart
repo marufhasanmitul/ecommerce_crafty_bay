@@ -4,6 +4,7 @@ import 'package:ecommerce_crafty_bay/presentation/state_holders/main_bottom_nav_
 import 'package:ecommerce_crafty_bay/presentation/state_holders/new_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/popular_product_controller.dart';
 import 'package:ecommerce_crafty_bay/presentation/state_holders/special_product_controller.dart';
+import 'package:ecommerce_crafty_bay/presentation/ui/screen/aurth/complete_profile_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/screen/product_list_screen.dart';
 import 'package:ecommerce_crafty_bay/presentation/ui/utils/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const Spacer(),
             CircularIconButton(
               icon: Icons.person,
-              onTap: () {},
+              onTap: () {
+                Get.to(()=>CreateProfileScreen());
+              },
             ),
             CircularIconButton(
               icon: Icons.call,
@@ -105,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return CategoryCard(
                             OnTap:(){
-                              Get.to(ProductListScreen(
+                              Get.to(()=>ProductListScreen(
                                 name:categoryController.getCategory.data![index].categoryName ,
                                 categoryId: categoryController.getCategory.data![index].id,
                               ));

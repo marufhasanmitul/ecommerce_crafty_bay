@@ -27,6 +27,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int quanity=1;
 
 
+
   @override
   void initState() {
     super.initState();
@@ -47,11 +48,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
              return const Center(
                child: CircularProgressIndicator(),
              ) ;
-            }
-            if(productDetailsController.getProductModel.data!.isEmpty){
-              return const Center(
-                child: Text("Data is Empty"),
-              ) ;
             }
             
             return Column(
